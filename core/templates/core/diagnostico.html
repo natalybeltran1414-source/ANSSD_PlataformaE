@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2>Diagnóstico Inicial</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for modulo, preguntas in preguntas_por_modulo.items %}
+            <div class="mb-4">
+                <h3>{{ modulo.nombre }}</h3>
+                {% for pregunta in preguntas %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p><strong>{{ pregunta.texto }}</strong></p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="pregunta_{{ pregunta.id }}" value="A" required>
+                                <label class="form-check-label">{{ pregunta.opcion_a }}</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="pregunta_{{ pregunta.id }}" value="B">
+                                <label class="form-check-label">{{ pregunta.opcion_b }}</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="pregunta_{{ pregunta.id }}" value="C">
+                                <label class="form-check-label">{{ pregunta.opcion_c }}</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="pregunta_{{ pregunta.id }}" value="D">
+                                <label class="form-check-label">{{ pregunta.opcion_d }}</label>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Enviar Diagnóstico</button>
+    </form>
+</div>
+{% endblock %}

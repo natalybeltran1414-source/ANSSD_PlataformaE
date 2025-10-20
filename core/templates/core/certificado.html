@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="container certificate-container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card certificate-card">
+                <div class="card-header certificate-header">
+                    <h2 class="certificate-title">
+                        <i class="fas fa-award certificate-icon"></i>
+                        Certificado de Competencias Digitales
+                    </h2>
+                </div>
+                <div class="card-body certificate-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 text-center">
+                            <i class="fas fa-medal certificate-medal"></i>
+                        </div>
+                        <div class="col-md-9">
+                            <h3 class="certificate-congrats">¡Felicidades {{ user.perfil.nombre }}!</h3>
+                            <p class="certificate-message">Has completado exitosamente todos los módulos de capacitación en competencias digitales.</p>
+                            <p class="certificate-description">Tu certificado oficial está listo para descargar en formato horizontal e incluye las firmas digitales correspondientes.</p>
+                            
+                            <div class="alert certificate-alert">
+                                <i class="fas fa-info-circle"></i>
+                                <strong>Características del certificado:</strong>
+                                <ul class="certificate-features">
+                                    <li>Formato horizontal profesional</li>
+                                    <li>Firmas digitales incluidas</li>
+                                    <li>Código de verificación único</li>
+                                    <li>Diseño oficial del programa</li>
+                                </ul>
+                            </div>
+                            
+                            <a href="{% url 'certificado' %}" class="btn certificate-download-btn">
+                                <i class="fas fa-download"></i>
+                                Descargar Certificado
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer certificate-footer">
+                    <small class="certificate-validity">
+                        <i class="fas fa-shield-alt"></i>
+                        Certificado válido y verificado - Emitido el {{ user.date_joined|date:"d/m/Y" }}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

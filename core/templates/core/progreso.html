@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+{% load mi_filtros %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2>Panel de Progreso</h2>
+
+    {% if mensaje_resultado %}
+        <div class="alert {{ mensaje_resultado.clase }} alert-dismissible fade show" role="alert">
+            {{ mensaje_resultado.mensaje|safe }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    {% if total > 0 %}
+        <p>
+            <strong>Progreso:</strong> {{ completados }} de {{ total }} módulos completados
+            ({{ porcentaje_real }}%)
+        </p>
+        <div class="progress mb-3">
+            <div class="progress-bar bg-success"
+                role="progressbar"
+                style="width: {{ porcentaje_real }}%" 
+                aria-valuenow="{{ porcentaje_real }}" 
+                aria-valuemin="0"
+                aria-valuemax="100">
+                {{ porcentaje_real }}%
+            </div>
+        </div>
+    {% else %}
+        <p class="text-muted">No hay módulos disponibles para mostrar el progreso.</p>
+    {% endif %}
+
+    <h3>Módulos</h3>
+    {% if progresos %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Módulo</th>
+                        <th>Estado</th>
+                        <th>Puntaje</th>
+                        <th>Certificado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for progreso in progresos %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'modulo' progreso.modulo.id %}">
+                                {{ progreso.modulo.nombre|default:"Sin nombre" }}
+                            </a>
+                        </td>
+                        <td>
+                            <span class="badge {% if progreso.completado %}bg-success{% else %}bg-warning{% endif %}">
+                                {{ progreso.completado|yesno:"Completado,Pendiente" }}
+                            </span>
+                        </td>
+                        <td>{{ progreso.puntaje|default:0 }}/10</td>
+                        <td>
+                            {% if progreso.completado %}
+                                <a href="{% url 'certificado' progreso.modulo.id %}" class="btn btn-success btn-sm">
+                                    Certificado
+                                </a>
+                            {% else %}
+                                <span class="text-muted">Completa el módulo</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted">No hay progresos registrados. Completa el diagnóstico para comenzar.</p>
+    {% endif %}
+
+    <h3>Recomendaciones</h3>
+    {% if modulos_pendientes %}
+        <div class="alert alert-info">
+            <p class="mb-2">- Te recomendamos continuar con:</p>
+            <div class="ms-3">
+                {% for progreso in modulos_pendientes %}
+                <div class="mb-1">• {{ progreso.modulo.nombre|default:"Sin nombre" }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            <p class="mb-0">¡Felicidades! Has completado todos los módulos.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <!-- Encabezado con botón de regreso -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Módulo: {{ modulo.nombre }}</h2>
+        <a href="{% url 'progreso' %}" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
+
+    <p class="text-muted">{{ modulo.descripcion }}</p>
+    
+    <h4 class="mt-4">Contenido del Módulo</h4>
+    <div class="alert alert-info">
+        {% if "Comunicación Digital" in modulo.nombre %}
+            {# Contenido Comunicación Digital #}
+            • <strong>Correo Electrónico:</strong> Formal, adjuntos, respuesta<br>
+            • <strong>Foros y Chats:</strong> Netiqueta, participación<br>
+            • <strong>Redes Sociales:</strong> Uso profesional, privacidad<br>
+            • <strong>Videollamadas:</strong> Herramientas, etiqueta
+        
+        {% elif "Ofimáticas" in modulo.nombre %}
+            {# Contenido Herramientas Ofimáticas #}
+            • <strong>Microsoft Word:</strong> Formato texto, tablas, documentos<br>
+            • <strong>Microsoft Excel:</strong> Fórmulas, formato, gráficos<br>
+            • <strong>Microsoft PowerPoint:</strong> Diapositivas, presentaciones<br>
+            • <strong>Colaboración:</strong> Trabajo en equipo en la nube
+        
+        {% elif "Seguro" in modulo.nombre %}
+            {# Contenido Uso Seguro de Internet #}
+            • <strong>Contraseñas:</strong> Creación y gestión segura<br>
+            • <strong>Protección:</strong> Antivirus, firewall, VPN<br>
+            • <strong>Phishing:</strong> Identificación y prevención<br>
+            • <strong>Redes Sociales:</strong> Seguridad y privacidad
+        
+        {% else %}
+            Contenido en desarrollo...
+        {% endif %}
+    </div>
+    
+    <h4 class="mt-4">Examen de Aprobación</h4>
+    
+    {% if progreso.completado %}
+        <div class="alert alert-success">
+            ¡Módulo Aprobado! Tu puntaje más reciente fue de {{ progreso.puntaje }} aciertos.
+        </div>
+        <a href="{% url 'progreso' %}" class="btn btn-secondary">Volver a Progreso</a>
+    {% else %}
+        <div class="alert alert-warning">
+            Para completar el módulo, debes aprobar el examen con un mínimo de 7 aciertos.
+        </div>
+        <a href="{% url 'examen_modulo' modulo.id %}" class="btn btn-success btn-lg">
+            <i class="fas fa-play"></i> Iniciar Examen 
+        </a>
+    {% endif %}
+</div>
+{% endblock %}

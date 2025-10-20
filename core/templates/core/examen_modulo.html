@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-3">Examen de Aprobación: {{ modulo.nombre }}</h2>
+    <p class="lead">Responde las 10 preguntas. Necesitas acertar al menos **7** para aprobar el módulo. ¡Adelante!</p>
+    
+    {% if not preguntas %}
+        <div class="alert alert-warning">
+            No hay preguntas de examen cargadas para este módulo.
+        </div>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            {% for pregunta in preguntas %}
+                <div class="mb-4 p-3 border rounded">
+                    <p class="font-weight-bold">Pregunta {{ forloop.counter }}: {{ pregunta.texto }}</p>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pregunta_{{ pregunta.id }}" id="opcion_a_{{ pregunta.id }}" value="A" required>
+                        <label class="form-check-label" for="opcion_a_{{ pregunta.id }}">A) {{ pregunta.opcion_a }}</label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pregunta_{{ pregunta.id }}" id="opcion_b_{{ pregunta.id }}" value="B">
+                        <label class="form-check-label" for="opcion_b_{{ pregunta.id }}">B) {{ pregunta.opcion_b }}</label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pregunta_{{ pregunta.id }}" id="opcion_c_{{ pregunta.id }}" value="C">
+                        <label class="form-check-label" for="opcion_c_{{ pregunta.id }}">C) {{ pregunta.opcion_c }}</label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pregunta_{{ pregunta.id }}" id="opcion_d_{{ pregunta.id }}" value="D">
+                        <label class="form-check-label" for="opcion_d_{{ pregunta.id }}">D) {{ pregunta.opcion_d }}</label>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary btn-lg mt-3">Enviar Examen y Revisar</button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

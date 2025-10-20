@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2>Tutor IA</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="pregunta" class="form-label">Selecciona una pregunta:</label>
+            <select name="pregunta" class="form-select" required>
+                <option value="">-- Selecciona una pregunta --</option>
+                {% for pregunta in preguntas %}
+                    <option value="{{ pregunta }}">{{ pregunta }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-info">Preguntar</button>
+    </form>
+    {% if respuesta %}
+        <div class="alert alert-success mt-3">{{ respuesta }}</div>
+    {% endif %}
+</div>
+{% endblock %}

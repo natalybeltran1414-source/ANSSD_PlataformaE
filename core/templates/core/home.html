@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load mi_filtros %}
+{% block content %}
+<div class="card text-center shadow-sm">
+    <div class="card-body">
+        <h1 class="card-title">Bienvenido a la Plataforma ANSSD</h1>
+        <p class="card-text">Evalúa y fortalece tus competencias digitales con nuestro sistema adaptativo.</p>
+        {% if user.is_authenticated %}
+            {% if diagnostico_completado %}
+                <a href="{% url 'progreso' %}" class="btn btn-success btn-lg mt-3">Continuar con el Progreso</a>
+            {% else %}
+                <a href="{% url 'diagnostico' %}" class="btn btn-primary btn-lg mt-3">Comenzar Diagnóstico</a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg mt-3">Registrarse</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg mt-3">Iniciar Sesión</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
