@@ -65,7 +65,7 @@ class Progreso(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE)
     completado = models.BooleanField(default=False)
-    puntaje = models.IntegerField(default=0) # NOTA: Este campo guardará el puntaje del EXAMEN final (o diagnóstico, depende de la última acción).
+    puntaje = models.IntegerField(default=0) 
     def __str__(self):
         return f"{self.user.username} - {self.modulo.nombre}"
     

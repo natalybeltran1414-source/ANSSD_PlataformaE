@@ -52,7 +52,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Transiciones mejoradas */
+/* Transiciones  */
 a, button, .nav-link, .btn, .card, .form-control, .input-group-text, 
 .badge, .progress-bar, .alert, .table tr {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,7 +66,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
 }
 
 /* -------------------------------------------------- */
-/* 2. Navegación Mejorada */
+/* 2. Navegación */
 /* -------------------------------------------------- */
 
 .navbar {
@@ -121,7 +121,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
 }
 
 /* -------------------------------------------------- */
-/* 3. Cards Mejoradas */
+/* 3. Cards  */
 /* -------------------------------------------------- */
 
 .card {
@@ -168,7 +168,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
 }
 
 /* -------------------------------------------------- */
-/* 4. Botones Mejorados */
+/* 4. Botones  */
 /* -------------------------------------------------- */
 
 .btn {
@@ -225,7 +225,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
 }
 
 /* -------------------------------------------------- */
-/* 5. Formularios Mejorados - ESTILOS ACTUALIZADOS */
+/* 5. Formularios */
 /* -------------------------------------------------- */
 
 .form-control, .form-select {
@@ -252,7 +252,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
     display: block;
 }
 
-/* Manteniendo estilos existentes para consistencia */
+
 .form-control, .form-select {
     border: 2px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -269,7 +269,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
     transform: translateY(-1px);
 }
 
-/* Grupo de input para contraseña mejorado */
+/* Grupo de input para contraseña  */
 .input-group {
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -302,7 +302,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
 /* 6. Componentes Específicos del Panel de Progreso */
 /* -------------------------------------------------- */
 
-/* Barra de progreso mejorada */
+/* Barra de progreso  */
 .progress {
     height: 12px;
     border-radius: var(--radius-xl);
@@ -335,7 +335,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
     100% { left: 100%; }
 }
 
-/* Tabla mejorada */
+/* Tabla  */
 .table {
     border-radius: var(--radius-xl);
     overflow: hidden;
@@ -366,7 +366,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
     background-color: var(--color-bg-subtle);
 }
 
-/* Badges mejorados */
+/* Badges  */
 .badge {
     padding: 0.5rem 1rem;
     border-radius: var(--radius-lg);
@@ -383,7 +383,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
     color: white !important;
 }
 
-/* Alertas mejoradas */
+/* Alertas */
 .alert {
     border: none;
     border-radius: var(--radius-xl);
@@ -422,7 +422,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
 }
 
 /* -------------------------------------------------- */
-/* 7. ESTILOS MEJORADOS PARA LOGIN */
+/* 7. ESTILOS  PARA LOGIN */
 /* -------------------------------------------------- */
 
 .login-card {
@@ -464,7 +464,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
     padding: 2.5rem 2rem;
 }
 
-/* Estilos específicos para el formulario Django */
+/* Estilos específicos para el formulario  */
 .login-form {
     display: flex;
     flex-direction: column;
@@ -649,7 +649,7 @@ a, button, .nav-link, .btn, .card, .form-control, .input-group-text,
 }
 
 /* -------------------------------------------------- */
-/* 10. Mejoras de Accesibilidad */
+/* 10.  Accesibilidad */
 /* -------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {

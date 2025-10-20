@@ -14,6 +14,7 @@ from reportlab.lib.colors import HexColor, Color
 from django.contrib.auth.models import User 
 from math import pi, sin
 
+
 def home(request):
     diagnostico_completado = False
     if request.user.is_authenticated:
@@ -25,7 +26,6 @@ def home(request):
     
     return render(request, 'core/home.html',context)
 
-# En tu views.py
 
 def register(request):
     if request.method == 'POST':
@@ -59,9 +59,8 @@ def perfil(request):
         return render(request, 'core/perfil.html', {'perfil': perfil_obj})
         
     except Perfil.DoesNotExist:
-        # Cambia 'actualizar_perfil' por 'editar_perfil'
         messages.warning(request, 'Por favor, completa tu información de perfil.')
-        return redirect('editar_perfil')  # ← CAMBIA AQUÍ
+        return redirect('editar_perfil') 
 
 @login_required
 def editar_perfil(request):
@@ -84,13 +83,13 @@ def editar_perfil(request):
 @login_required
 def diagnostico(request):
     modulos = Modulo.objects.all()
-    # 🌟 FILTRO CLAVE: Solo Preguntas de Diagnóstico ('D') 🌟
+    #  FILTRO CLAVE: Solo Preguntas de Diagnóstico ('D') 
     preguntas_por_modulo = {modulo: Pregunta.objects.filter(modulo=modulo, tipo_pregunta='D') for modulo in modulos}
     
     if request.method == 'POST':
         brechas = []
         for modulo in modulos:
-            # 🌟 FILTRO CLAVE: Solo Preguntas de Diagnóstico ('D') 🌟
+            #  FILTRO CLAVE: Solo Preguntas de Diagnóstico ('D') 
             preguntas = Pregunta.objects.filter(modulo=modulo, tipo_pregunta='D')
             puntaje = 0
             total_preguntas = len(preguntas)
@@ -131,7 +130,7 @@ def modulo(request, modulo_id):
 def examen_modulo(request, modulo_id):
     modulo = get_object_or_404(Modulo, id=modulo_id)
     
-    # 🌟 FILTRO CLAVE: Solo Preguntas de Examen ('E') y limitadas a 10 🌟
+    # FILTRO CLAVE: Solo Preguntas de Examen ('E') y limitadas a 10 
     preguntas = Pregunta.objects.filter(modulo=modulo, tipo_pregunta='E')[:10] 
     
     progreso, _ = Progreso.objects.get_or_create(user=request.user, modulo=modulo)
@@ -144,7 +143,7 @@ def examen_modulo(request, modulo_id):
         puntaje = 0
         
         for pregunta in preguntas:
-            # La respuesta se espera en mayúsculas (A, B, C, D)
+
             respuesta_dada = request.POST.get(f'pregunta_{pregunta.id}')
             
             # Comprobación de la respuesta
@@ -155,7 +154,7 @@ def examen_modulo(request, modulo_id):
         if puntaje >= 7:
             progreso.completado = True
             mensaje_clase = "alert-success"
-            mensaje = f"¡Felicidades! Has aprobado el módulo '{modulo.nombre}' con *{puntaje}* aciertos. ✨"
+            mensaje = f"¡Felicidades! Has aprobado el módulo '{modulo.nombre}' con {puntaje} aciertos. ✨"
         else:
             progreso.completado = False # Asegurar que si reprueba, no se marque como completado
             mensaje_clase = "alert-danger"
@@ -242,11 +241,11 @@ def progreso(request):
         'completados': completados_count,
         'total': total,
         'porcentaje_real': porcentaje_real,
-        'modulos_pendientes': modulos_pendientes,  # Cambiado a plural
+        'modulos_pendientes': modulos_pendientes,  
         'mensaje_resultado': mensaje_resultado
     })
 
-from math import pi, sin
+
 @login_required
 def generar_certificado(request, modulo_id):
     # Verifica si el módulo está completado para este usuario
@@ -273,11 +272,11 @@ def generar_certificado(request, modulo_id):
     p.setLineWidth(6)
     p.rect(margin, margin, width-2*margin, height-2*margin, stroke=1, fill=0)
 
-    # --- LOGOTIPO MEJORADO EN ESQUINA SUPERIOR DERECHA ---
+    # --- LOGOTIPO  EN ESQUINA SUPERIOR DERECHA ---
     logo_x = width - margin - 1.2*inch  # Posición X para el logo
     logo_y = height - margin - 0.8*inch  # Posición Y para el logo
     
-    # Nuevo logo parecido a la imagen: onda con gradiente azul a rosa
+    #  logo 
     p.setLineWidth(0.15*inch)
     p.setLineCap(1)
     segments = 100
