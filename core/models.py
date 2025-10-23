@@ -60,6 +60,7 @@ class Pregunta(models.Model):
     def __str__(self):
         return self.texto
 
+# Modelo para rastrear el progreso del usuario en los módulos
 class Progreso(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
